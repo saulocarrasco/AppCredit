@@ -13,5 +13,6 @@ namespace Data.Entities
         public string PhoneNumber { get; set; }
         public IEnumerable<Address> Addresses { get; set; }
         public IEnumerable<Identification> Identifications { get; set; }
+        public IEnumerable<Credit> Credits { get; set; }
     }
 }

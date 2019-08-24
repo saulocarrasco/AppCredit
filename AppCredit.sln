@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppCredit", "AppCredit\AppC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{6791DB41-0863-46A6-BA7B-A4E945EC8744}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{43229836-16F5-4AE0-8A9D-45A20C69AFDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6791DB41-0863-46A6-BA7B-A4E945EC8744}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6791DB41-0863-46A6-BA7B-A4E945EC8744}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6791DB41-0863-46A6-BA7B-A4E945EC8744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43229836-16F5-4AE0-8A9D-45A20C69AFDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43229836-16F5-4AE0-8A9D-45A20C69AFDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43229836-16F5-4AE0-8A9D-45A20C69AFDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43229836-16F5-4AE0-8A9D-45A20C69AFDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
