@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public interface IBaseObject
+    public interface ITransactionEntity
     {
         int Id { get; set; }
         bool IsDeleted { get; set; } 
