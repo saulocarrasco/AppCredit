@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public class FeeInformation : ITransactEntity
+    public class FeeInformation : ITransactionEntity
     {
         public int? CreditId { get; set; }
         public Credit Credit { get; set; }

@@ -31,7 +31,7 @@ namespace AppCredit
         {
             services.AddTransient<TransactionService, GenericService>();
 
-            services.AddDbContext<AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppCreditDbContext>(options => options.UseInMemoryDatabase(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
