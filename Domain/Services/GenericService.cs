@@ -10,6 +10,9 @@ namespace Domain.Services
 {
     public class GenericService : TransactionService
     {
-        
+        public GenericService(DbContext dbContext) :base(dbContext)
+        {
+
+        }
     }
 }
