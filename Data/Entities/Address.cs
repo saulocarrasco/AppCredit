@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public class Address : ITransactEntity
+    public class Address : ITransactionEntity
     {
         public string Street { get; set; }
         public string City { get; set; }
@@ -13,7 +13,7 @@ namespace Data.Entities
         public bool IsDeleted { get; set; }
         public DateTimeOffset CreationDate { get; set; }
         public DateTimeOffset DeletedDate { get; set; }
-        public Person Person { get; set; }
-        public int? PersonId { get; set; }
+        public Customer Customer { get; set; }
+        public int? CustomerId { get; set; }
     }
 }

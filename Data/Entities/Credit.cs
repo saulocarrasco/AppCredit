@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public class Credit : ITransactEntity
+    public class Credit : ITransactionEntity
     {
         public int Id { get; set; }
         public bool IsDeleted { get; set; }
         public DateTimeOffset CreationDate { get; set; }
         public DateTimeOffset DeletedDate { get; set; }
-        public int? PersonId { get; set; }
-        public Person Person { get; set; }
+        public int? CustomerId { get; set; }
+        public Customer Customer { get; set; }
         public double LoanAmount { get; set; }
         public int FeesNumber { get; set; }
         public PaymentMethod PaymentMethod { get; set; }

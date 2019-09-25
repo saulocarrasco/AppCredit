@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    ViewData["CurrentLocation"] = "Clientes";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-primary pull-right" asp-area="" asp-controller="Customer" asp-action="CustomerForm">
+           Crear Cliente
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">Lista de clientes</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Apellido
+                                </th>
+                                <th>
+                                    Fecha de nacimiento
+                                </th>
+                                <th>
+                                    Celular
+                                </th>
+                                <th>
+                                    Teléfono
+                                </th>
+                                <th>
+                                    Dirección
+                                </th>
+                                <th>
+                                    Identificación
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Nombre
+                                </td>
+                                <td>
+                                    Apellido
+                                </td>
+                                <td>
+                                    Fecha de nacimiento
+                                </td>
+                                <td>
+                                    Celular
+                                </td>
+                                <td>
+                                    Telefono
+                                </td>
+                                <td>
+                                    Direccion
+                                </td>
+                                <td>
+                                    Identificacion
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

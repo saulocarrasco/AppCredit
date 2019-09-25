@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,17 +13,33 @@ namespace Domain.Contracts
     {
         protected readonly DbContext _dbContext;
 
+        public TransactionService(DbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void Delete<TModel>(TModel model) where TModel : class, ITransactionEntity
         {
             model.IsDeleted = true;
             _dbContext.Entry(model).State = EntityState.Modified;
         }
 
-        public async Task<IEnumerable<TModel>> GetAll<TModel>(string includes) where TModel : class, ITransactionEntity
+        public Task<IEnumerable<TModel>> GetAll<TModel>(Expression<Func<TModel, bool>> where, string includes) where TModel : class, ITransactionEntity
         {
-            var result = await _dbContext.Set<TModel>().Include(includes).ToArrayAsync();
+            return Task.Run(()=> {
 
-            return result;
+                var result = _dbContext.Set<TModel>().AsQueryable();
+
+                foreach (var includeProperty in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    result = result.Include(includeProperty);
+                }
+
+                if (where != null)
+                    result = result.Where(where);
+
+                return result.AsEnumerable();
+            }); 
         }
 
         public async Task<TModel> Insert<TModel>(TModel model) where TModel : class, ITransactionEntity

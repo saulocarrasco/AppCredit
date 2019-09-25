@@ -29,9 +29,11 @@ namespace AppCredit
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<TransactionService, GenericService>();
+            services.AddSingleton(Configuration);
 
-            services.AddDbContext<AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<GenericService, GenericService>();
+
+            services.AddDbContext<DbContext, AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
