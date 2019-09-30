@@ -1,22 +1,38 @@
 ﻿var customerVue = new Vue({
-    el: "#form-bail",
+    el: "#customer",
     components: {
  
     },
     data: function () {
         return {
-            dataForm: {
+            dataModel: {
+                id: "",
                 name: "",
                 lastName: "",
                 birthDate: "",
                 mobilePhone: "",
-                phone: "",
-                address: "",
+                phoneNumber: "",
                 identification: "",
                 identificationType: "",
                 city: "",
-                country: ""
+                country: "",
+                region: "",
+                address: ""
             },
+            modelProperties: [
+                "Id",
+                "Name",
+                "LastName",
+                "BirthDate",
+                "MobilePhone",
+                "PhoneNumber",
+                "Identification",
+                "IdentificationType",
+                "City",
+                "Country",
+                "Region",
+                "Address"
+            ],
             typesBail: [],
             sectionText: "Registro de Fianzas",
             isDetail: false,
@@ -176,68 +192,37 @@
             var self = this;
             return self.dataForm.bailAmountExpected == self.dataForm.bailAmountReal;
         },
-        saveBail: function () {
+        saveCustomer: function (e) {
+
+            e.preventDefault();
 
             var self = this;
 
-            if (!self.validInput()) {
-                return false;
-            }
+            //if (!self.validInput()) {
+            //    return false;
+            //}
 
-            this.dataForm.comment = $('.summernote').summernote("code");
+           // this.dataForm.comment = $('.summernote').summernote("code");
 
-            MApp.ShowFullLoading();
+          //  MApp.ShowFullLoading();
 
-            var form = new FormData();
+            const config = { headers: { 'Content-Type': 'application/json' } };
 
-            form.append("declarationNo", this.dataForm.declarationNo);
-            form.append("importer", this.dataForm.importer);
-            form.append("rncImporter", this.dataForm.rncImporter);
-            form.append("regime", this.dataForm.regime);
-            form.append("rncInsureceCompany", this.dataForm.rncInsureceCompany);
-            form.append("insureCompanyName", this.dataForm.insureCompanyName);
-            form.append("initDate", moment(this.dataForm.initDate).format('YYYY-MM-DD HH:mm:ss'));
-            form.append("issueDate", moment(this.dataForm.issueDate).format('YYYY-MM-DD HH:mm:ss'));
-            form.append("expiryDate", moment(this.dataForm.expiryDate).format('YYYY-MM-DD HH:mm:ss'));
-            form.append("bailReliquidatedAmount", this.dataForm.bailReliquidatedAmount);
-            form.append("bailAmountExpected", this.dataForm.bailAmountExpected);
-            form.append("bailAmountReal", this.dataForm.bailAmountReal);
-            form.append("comment", this.dataForm.comment);
-            form.append("justify", this.dataForm.justify);
-            form.append("asignTo", this.dataForm.asignTo);
-            form.append("requestState", this.dataForm.requestState);
-            form.append("policyNumber", this.dataForm.policyNumber);
-            form.append("typeId", this.dataForm.typeId);
-            form.append("updateUser", this.dataForm.updateUser);
-            form.append("appSelected", this.dataForm.appSelected);
-            form.append("selectedEnsure", this.dataForm.selectedEnsure);
-            form.append("refurbishment", this.dataForm.refurbishment);
-            form.append("id", this.dataForm.id);
-            form.append("userName", $("#userName").val());
-
-            for (var index = 0; index < this.dataForm.fileItems.length; index++) {
-                //console.log(fileToSend[index].content);
-                form.append("fileItems", this.dataForm.fileItems[index]);
-            }
-
-            const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-
-            var endPoint = this.dataForm.id !== "" ? 'bailsystem/bail/updatebail/' : 'bailsystem/bail/addbail/';
+            var endPoint = this.dataModel.id !== "" ? 'customer/update/' : 'customer/insert/';
 
             instance.post(
                 endPoint,
-                form,
+                this.dataModel,
                 config
             ).then(function (response) {
 
                 self.clearInputs();
-                MApp.HideFullLoading();
-                MApp.messageBoxSuccess("Los cambios fueron guardados satisfactoriamente.");
-                window.location = "/Apps/bailsystem/home/bails";
+           //     MApp.messageBoxSuccess("Los cambios fueron guardados satisfactoriamente.");
+                window.location = "/api/customer/";
 
             }).catch(function (errors) {
 
-                MApp.ShowFullLoading();
+               // MApp.ShowFullLoading();
                 console.log(errors);
 
             });
@@ -351,56 +336,56 @@
     },
     mounted: function () {
 
-        var self = this;
+        //var self = this;
 
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var id = url.searchParams.get("id");
-        var caseId = url.searchParams.get("caseId");
-        var mode = url.searchParams.get("mode");
+        //var url_string = window.location.href;
+        //var url = new URL(url_string);
+        //var id = url.searchParams.get("id");
+        //var caseId = url.searchParams.get("caseId");
+        //var mode = url.searchParams.get("mode");
 
-        instance.get(`bailsystem/bail/getchildcatalog?parent=bail`).then(function (response) {
+        //instance.get(`bailsystem/bail/getchildcatalog?parent=bail`).then(function (response) {
 
-            self.typesBail = response.data;
-            /* self.typesBail.map(function (value, index) {
-                 currentAplications.push(value.acronym.toUpperCase());
-             });*/
+        //    self.typesBail = response.data;
+        //    /* self.typesBail.map(function (value, index) {
+        //         currentAplications.push(value.acronym.toUpperCase());
+        //     });*/
 
-        }).then(function () {
-            if (id) {
+        //}).then(function () {
+        //    if (id) {
 
-                self.sectionText = "Actualización De Fianza";
+        //        self.sectionText = "Actualización De Fianza";
 
-                instance.get(
-                    `bailsystem/bail/getbail?id=${id}`
-                ).then(function (response) {
+        //        instance.get(
+        //            `bailsystem/bail/getbail?id=${id}`
+        //        ).then(function (response) {
 
-                    self.dataForm = response.data || {};
-                    $('.summernote').summernote("code", self.dataForm.comment);
+        //            self.dataForm = response.data || {};
+        //            $('.summernote').summernote("code", self.dataForm.comment);
 
-                }).then(function () {
+        //        }).then(function () {
 
-                    if (mode && mode === "detail") {
+        //            if (mode && mode === "detail") {
 
-                        $('.summernote').summernote('disable');
+        //                $('.summernote').summernote('disable');
 
-                        //setTimeout(() => {
-                        //    $('.justifyText').summernote("code", self.dataForm.justify);
-                        //    $('.justifyText').summernote('disable');
-                        //}, 2);
+        //                //setTimeout(() => {
+        //                //    $('.justifyText').summernote("code", self.dataForm.justify);
+        //                //    $('.justifyText').summernote('disable');
+        //                //}, 2);
 
-                        self.sectionText = "Información de Fianza";
-                        self.isDetail = true;
+        //                self.sectionText = "Información de Fianza";
+        //                self.isDetail = true;
 
-                    } else if (id) {
-                        self.sectionText = "Actualización De Fianza";
-                        self.dataForm.fileItems = [];
-                    } else {
-                        self.sectionText = "Registro De Fianza";
-                    }
-                });
-            }
-        });
+        //            } else if (id) {
+        //                self.sectionText = "Actualización De Fianza";
+        //                self.dataForm.fileItems = [];
+        //            } else {
+        //                self.sectionText = "Registro De Fianza";
+        //            }
+        //        });
+        //    }
+        //});
     },
     watch: {
         "dataForm.appSelected": function (value) {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCredit", "AppCredit\AppCredit.csproj", "{272531D2-CB77-4F95-8424-2FAA517BA721}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppCredit.Api", "AppCredit\AppCredit.Api.csproj", "{272531D2-CB77-4F95-8424-2FAA517BA721}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{6791DB41-0863-46A6-BA7B-A4E945EC8744}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTesting", "UnitTesting\UnitTesting.csproj", "{D6FA6A31-5A0E-4A20-BB2A-06C218B86089}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontPage", "FrontPage\FrontPage.csproj", "{E59A3BC5-E373-45BD-B5DF-AE1E317CFB5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrontPage", "FrontPage\FrontPage.csproj", "{E59A3BC5-E373-45BD-B5DF-AE1E317CFB5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
