@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AppCredit.Api.Dtos;
+using AutoMapper;
 using Data.Entities;
 using Domain.Services;
 using Microsoft.AspNetCore.Http;
@@ -16,10 +17,12 @@ namespace AppCredit.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly GenericService _genericService;
+        private readonly IMapper _mapper;
 
-        public CustomerController(GenericService genericService)
+        public CustomerController(GenericService genericService, IMapper mapper)
         {
             _genericService = genericService;
+            _mapper = mapper;
         }
 
         // GET: api/Addresses
@@ -31,18 +34,19 @@ namespace AppCredit.Controllers
 
         [HttpPost("insert")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult> Insert([FromForm]CustomerDto customer)
+        public async Task<ActionResult> Insert([FromBody]CustomerDto customerDto)
         {
-            //var model = await _genericService.Insert(customer);
-            //var changesResult = await _genericService.SavesChanges();
+            var customer = _mapper.Map<Customer>(customerDto);
 
-            //if (changesResult > 0)
-            //{
-            //    return Ok(model);
-            //}
+            var model = await _genericService.Insert(customer);
+            var changesResult = await _genericService.SavesChanges();
 
-            return Ok(1);
-           // return BadRequest();
+            if (changesResult > 0)
+            {
+                return Ok(model);
+            }
+
+            return BadRequest();
         }
     }
 }

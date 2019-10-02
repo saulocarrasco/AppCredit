@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using AutoMapper;
+using AppCredit.Api.ProfilesConfig;
 
 namespace AppCredit
 {
@@ -45,9 +46,29 @@ namespace AppCredit
                 });
             });
 
-            services.AddTransient<IMapper, IMapper>();
+            services.AddTransient<IMapper, Mapper>();
+
+
+            AutoMapperConfig(services);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+        }
+
+        private void AutoMapperConfig(IServiceCollection services)
+        {
+            IEnumerable<Profile> profiles = new List<Profile>
+            {
+                new CustomerProfile()
+            };
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfiles(profiles);
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
