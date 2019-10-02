@@ -10,7 +10,7 @@ namespace AppCredit.Api.Dtos
         public int Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public DateTimeOffset BirthDate { get; set; }
+        public string BirthDate { get; set; }
         public string MobilePhone { get; set; }
         public string PhoneNumber { get; set; }
         public string Identification { get; set; }
@@ -20,7 +20,7 @@ namespace AppCredit.Api.Dtos
         public string Region { get; set; }
         public string Address { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTimeOffset CreationDate { get; set; }
-        public DateTimeOffset DeletedDate { get; set; }
+        public string CreationDate { get; set; }
+        public string DeletedDate { get; set; }
     }
 }
