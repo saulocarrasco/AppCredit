@@ -10,7 +10,7 @@ using Domain.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AppCredit.Controllers
+namespace AppCredit.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -29,7 +29,7 @@ namespace AppCredit.Controllers
         [HttpGet]
         public Task<IEnumerable<Customer>> GetCustomers()
         {
-            return _genericService.GetAll<Customer>(null, "");
+            return _genericService.GetAll<Customer>(null, "Addresses,Identifications,Credits");
         }
 
         [HttpPost("insert")]
@@ -37,6 +37,9 @@ namespace AppCredit.Controllers
         public async Task<ActionResult> Insert([FromBody]CustomerDto customerDto)
         {
             var customer = _mapper.Map<Customer>(customerDto);
+
+            customer.CreationDate = DateTimeOffset.UtcNow.AddHours(-4);
+            customer.IsDeleted = false;
 
             var model = await _genericService.Insert(customer);
             var changesResult = await _genericService.SavesChanges();

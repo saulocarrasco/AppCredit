@@ -6,8 +6,8 @@ namespace Data.Entities
 {
     public class FeeInformation : ITransactionEntity
     {
-        public int? CreditId { get; set; }
-        public Credit Credit { get; set; }
+        public int? LoanId { get; set; }
+        public Loan Loan { get; set; }
         public int Number { get; set; }
         public DateTimeOffset Date { get; set; }
         public double TotalFee { get; set; }

@@ -6,7 +6,8 @@ namespace Data.Entities
 {
     public enum PaymentMethod
     {
-        Daily = 1,
-        monthly = 30
+        Daily = 300,
+        monthly = 12,
+        Biweekly = 24
     }
 }
