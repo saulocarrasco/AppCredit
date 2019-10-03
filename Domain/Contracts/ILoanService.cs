@@ -8,6 +8,6 @@ namespace Domain.Contracts
 {
     public interface ILoanService
     {
-        virtual IEnumerable<Loan> GetAmortization(decimal capital, decimal bankRate, int quantityAliquot, int modality, DateTimeOffset startDate);
+        Loan GetAmortization(decimal capital, decimal bankRate, int quantityAliquot, int modality, DateTimeOffset startDate);
     }
 }
