@@ -17,13 +17,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Tipo de identificación</label>
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" v-model="dataModel.identificationType"/>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class="bmd-label-floating">No. Identificación</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="dataModel.identification">
                             </div>
                         </div>
                     </div>
@@ -31,19 +31,19 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Nombre</label>
-                                <input type="text" class="form-control" disabled>
+                                <input type="text" class="form-control" v-model="dataModel.name">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Apellido</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="dataModel.lastName">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Fecha de nacimiento</label>
-                                <input type="email" class="form-control">
+                                <input type="date" class="form-control" v-model="dataModel.birthDate">
                             </div>
                         </div>
                     </div>
@@ -51,13 +51,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Celular</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="dataModel.mobilePhone">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Teléfono</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="dataModel.phoneNumber">
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Dirección</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="dataModel.address">
                             </div>
                         </div>
                     </div>
@@ -73,13 +73,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Ciudad</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="dataModel.city">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">País</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" v-model="dataModel.country">
                             </div>
                         </div>
                     </div>
