@@ -15,7 +15,8 @@ namespace Data.Entities
         public decimal CapitalPayment{get;set;}
         public int Id {get; set; }
         public bool IsDeleted { get; set; }
-        public DateTimeOffset CreationDate { get ; set; }
-        public DateTimeOffset DeletedDate { get; set; }
+        public DateTimeOffset? CreationDate { get ; set; }
+        public DateTimeOffset? DeletedDate { get; set; }
+        public decimal RateAmount { get; set; }
     }
 }

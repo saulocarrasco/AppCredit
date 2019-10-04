@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FrontPage.Controllers
 {
-    public class CreditController : Controller
+    public class LoanController : Controller
     {
         public IActionResult Index()
         {

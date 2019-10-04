@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewData["Title"] = "Prestamos";
+    ViewData["CurrentLocation"] = "Prestamos";
+}
+
+<h2>Prestamos</h2>
+
+<div id="rootElement">
+    <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Información para crear prestamo</h4>
+                <p class="card-category">Complete los datos del prestamo</p>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Monto</label>
+                                <input type="text" class="form-control" v-model="basicInfoLoad.capital"/>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Interés</label>
+                                <input type="text" class="form-control" v-model="basicInfoLoad.bankRate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Cuotas</label>
+                                <input type="text" class="form-control" v-model="basicInfoLoad.quantityAliquot">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Modalidad de pago</label>
+                                <input type="text" class="form-control" v-model="basicInfoLoad.modality">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Fecha de inicio</label>
+                                <input type="text" class="form-control" v-model="basicInfoLoad.startDate">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary pull-right" v-on:click="generateLoan">Crear Prestamo</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">Información de prestamo</h4>
+                <p class="card-category"></p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Total a pagar
+                                </th>
+                                <th>
+                                    Capital Restante
+                                </th>
+                                <th>
+                                    Abono al capital
+                                </th>
+                                <th>
+                                    Interes
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody v-if="loanInformation">
+                            <tr v-for="item in loanInformation" :key="item.date">
+                                <td>
+                                  {{item.date}}
+                                </td>
+                                <td>
+                                    {{item.totalFee}}
+                                </td>
+                                <td>
+                                    {{item.currentAmount}}
+                                </td>
+                                <td>
+                                    {{item.capitalPayment}}
+                                </td>
+                                <td>
+                                    {{item.rateAmount}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section OwnScript{
+    <script src="~/js/loan/loanService.js"></script>
+}
