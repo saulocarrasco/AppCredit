@@ -2,6 +2,7 @@
 using Domain.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace Domain.Services
     {
         public Loan GetAmortization(decimal capital, double bankRate, int quantityAliquot, int modality, DateTimeOffset startDate)
         {
+           // var paymentMethod = (PaymentMethod) modality;
 
             List<FeeInformation> loadDetails = new List<FeeInformation>();
 
@@ -31,6 +33,7 @@ namespace Domain.Services
             var feeAmount = capital * Convert.ToDecimal(formulaRigth);
 
             var currentCapital = capital;
+            var currentStartDate = startDate;
 
             for (int i = 0; i <= quantityAliquot; i++)
             {
@@ -40,7 +43,7 @@ namespace Domain.Services
                 //pago a capital
                 decimal paymentToCapital = feeAmount - interestPaid;
 
-                loadDetails.Add(new FeeInformation
+                var feeDetail = new FeeInformation
                 {
                     TotalFee = feeAmount,
                     CapitalPayment = paymentToCapital,
@@ -49,11 +52,17 @@ namespace Domain.Services
                     CreationDate = DateTimeOffset.UtcNow.AddHours(-4),
                     IsDeleted = false,
                     DeletedDate = null
-                });
+                };
 
+                feeDetail.Date = currentStartDate.AddDays(modality);
+
+                loadDetails.Add(feeDetail);
+
+                currentStartDate = feeDetail.Date;
                 currentCapital -= paymentToCapital;
             }
 
+            loan.End = loadDetails.LastOrDefault().Date;
             loan.FeeInformations = loadDetails;
 
             return loan;

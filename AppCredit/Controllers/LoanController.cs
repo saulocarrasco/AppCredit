@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppCredit.Api.Dtos;
 using AutoMapper;
 using Data.Entities;
 using Domain.Contracts;
@@ -27,10 +28,9 @@ namespace AppCredit.Api.Controllers
 
         // GET: api/GetAmortization
         [HttpGet]
-        public Loan GetAmortization(decimal capital, decimal bankRate, int quantityAliquot, int modality)
+        public Loan GetAmortization(LoanStartInformationDto loanStartInformationDto)
         {
-            // return _creditService.GetAmortization(capital, bankRate, quantityAliquot, modality, DateTimeOffset.UtcNow);
-            return _creditService.GetAmortization(10000, 0.666, 42, 360, DateTimeOffset.UtcNow);
+            return _creditService.GetAmortization(loanStartInformationDto.Capital, loanStartInformationDto.BankRate, loanStartInformationDto.QuantityAliquot, loanStartInformationDto.Modality, loanStartInformationDto.StartDate);
         }
     }
 }
