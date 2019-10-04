@@ -8,7 +8,7 @@ namespace Data.Entities
     {
         int Id { get; set; }
         bool IsDeleted { get; set; } 
-        DateTimeOffset CreationDate { get; set; }
-        DateTimeOffset DeletedDate { get; set; }
+        DateTimeOffset? CreationDate { get; set; }
+        DateTimeOffset? DeletedDate { get; set; }
     }
 }
