@@ -12,7 +12,7 @@ namespace Domain.Services
     {
         public Loan GetAmortization(decimal capital, double bankRate, int quantityAliquot, int modality, DateTimeOffset startDate)
         {
-           // var paymentMethod = (PaymentMethod) modality;
+            // var paymentMethod = (PaymentMethod) modality;
 
             List<FeeInformation> loadDetails = new List<FeeInformation>();
 

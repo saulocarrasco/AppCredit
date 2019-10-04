@@ -27,7 +27,7 @@ namespace AppCredit.Api.Controllers
         }
 
         // GET: api/GetAmortization
-        [HttpGet]
+        [HttpPost]
         public Loan GetAmortization(LoanStartInformationDto loanStartInformationDto)
         {
             return _creditService.GetAmortization(loanStartInformationDto.Capital, loanStartInformationDto.BankRate, loanStartInformationDto.QuantityAliquot, loanStartInformationDto.Modality, loanStartInformationDto.StartDate);
