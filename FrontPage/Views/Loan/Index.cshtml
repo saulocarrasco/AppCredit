@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Cuotas</label>
                                 <input type="text" class="form-control" v-model="basicInfoLoad.quantityAliquot">
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary pull-right" v-on:click="generateLoan">Crear Prestamo</button>
+                    <button class="btn btn-primary pull-right" v-on:click="generateLoan">Calcular prestamo</button>
                     <div class="clearfix"></div>
                 </form>
             </div>
@@ -70,6 +70,9 @@
                     <table class="table">
                         <thead class=" text-primary">
                             <tr>
+                                <td>
+                                    No.
+                                </td>
                                 <th>
                                     Fecha
                                 </th>
@@ -88,9 +91,12 @@
                             </tr>
                         </thead>
                         <tbody v-if="loanInformation">
-                            <tr v-for="item in loanInformation" :key="item.date">
+                            <tr v-for="(item, index) in loanInformation" :key="index">
                                 <td>
-                                  {{item.date}}
+                                    {{ingrementIndex(index)}}
+                                </td>
+                                <td>
+                                    {{formatWithMoment(item.date)}}
                                 </td>
                                 <td>
                                     {{item.totalFee}}

@@ -35,6 +35,12 @@
             }).catch(function (errors) {
                 console.log(errors);
             });
+        },
+        ingrementIndex: function (index) {
+            return index += 1;
+        },
+        formatWithMoment: function (date) {
+            return moment(date).format("DD/MM/YYYY");
         }
     }
 });
