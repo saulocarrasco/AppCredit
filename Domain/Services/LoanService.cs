@@ -30,29 +30,36 @@ namespace Domain.Services
             var formulaRigth = dividend / divider;
 
             //cuota
-            var feeAmount = capital * Convert.ToDecimal(formulaRigth);
+            var feeAmount = Math.Round(capital * Convert.ToDecimal(formulaRigth), 2);
 
             var currentCapital = capital;
             var currentStartDate = startDate;
 
-            for (int i = 0; i <= quantityAliquot; i++)
+            for (int i = 1; i <= quantityAliquot; i++)
             {
                 //interes pagado
-                decimal interestPaid = currentCapital * Convert.ToDecimal(bankRateFixed);
+                decimal interestPaid = Math.Round(currentCapital * Convert.ToDecimal(bankRateFixed), 2);
+
+                if (i == quantityAliquot)
+                {
+                    feeAmount = currentCapital;
+                }
 
                 //pago a capital
-                decimal paymentToCapital = feeAmount - interestPaid;
+                decimal paymentToCapital = Math.Round((feeAmount - interestPaid), 2);
+
 
                 var feeDetail = new FeeInformation
                 {
                     TotalFee = feeAmount,
                     CapitalPayment = paymentToCapital,
                     RateAmount = interestPaid,
-                    CurrentAmount = currentCapital,
+                    CurrentAmount = Math.Round(currentCapital, 2),
                     CreationDate = DateTimeOffset.UtcNow.AddHours(-4),
                     IsDeleted = false,
                     DeletedDate = null
                 };
+
 
                 feeDetail.Date = currentStartDate.AddDays(modality);
 
