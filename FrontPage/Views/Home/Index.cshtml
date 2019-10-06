@@ -2,23 +2,22 @@
     ViewData["Title"] = "Inicio";
     ViewData["CurrentLocation"] = "Inicio";
 }
-<div class="row">
+<div class="row" id="rootElement">
     <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="card card-stats">
-            <div class="card-header card-header-warning card-header-icon">
+            <div class="card-header card-header-info card-header-icon">
                 <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
+                    <i class="material-icons">credit_card</i>
                 </div>
                 <p class="card-category">Prestamos</p>
                 <h3 class="card-title">
-                    49/50
-                    <small>GB</small>
+                    49
+                    <small>Prestamos actuales</small>
                 </h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <i class="material-icons text-danger">warning</i>
-                    <a href="#pablo">Get More Space...</a>
+                    <i class="material-icons text-info">info</i>
                 </div>
             </div>
         </div>
@@ -27,14 +26,14 @@
         <div class="card card-stats">
             <div class="card-header card-header-success card-header-icon">
                 <div class="card-icon">
-                    <i class="material-icons">store</i>
+                    <i class="material-icons">face</i>
                 </div>
                 <p class="card-category">Clientes</p>
-                <h3 class="card-title">20</h3>
+                <h3 class="card-title">20 <small>Cantidad de clientes activos</small></h3>
             </div>
             <div class="card-footer">
                 <div class="stats">
-                    <i class="material-icons">date_range</i> Last 24 Hours
+                    <i class="material-icons">people</i>
                 </div>
             </div>
         </div>
@@ -72,3 +71,6 @@
             </div>
         </div>*@
 </div>
+@section OwnScript{
+    <script src="~/js/home/dashboard.js"></script>
+}

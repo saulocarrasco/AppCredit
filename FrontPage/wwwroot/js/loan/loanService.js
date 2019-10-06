@@ -10,7 +10,8 @@
                 bankRate: 0.0,
                 quantityAliquot: 0,
                 modality: 0,
-                startDate:''
+                startDate: '',
+                dateHelper: Object
             },
             loanInformation: {},
         };
@@ -38,9 +39,10 @@
         },
         ingrementIndex: function (index) {
             return index += 1;
-        },
-        formatWithMoment: function (date) {
-            return moment(date).format("DD/MM/YYYY");
         }
+    },
+    mounted: function () {
+        self = this;
+        self.dateHelper = new DateHelper();
     }
 });

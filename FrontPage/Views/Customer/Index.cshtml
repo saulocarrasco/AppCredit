@@ -5,13 +5,13 @@
 }
 
 <div class="row">
-    <div class="col-md-12">
-        <a class="btn btn-primary pull-right" asp-area="" asp-controller="Customer" asp-action="CustomerForm">
-           Crear Cliente
+    <div class="col-md-12">'
+        <a class="btn btn-primary pull-right" href="/Customer/CustomerForm/">
+            Crear Cliente
         </a>
     </div>
 </div>
-<div class="row">
+<div class="row" id="rootElement">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header card-header-primary">
@@ -46,28 +46,28 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody v-if="customers">
+                            <tr v-for="item in customers">
                                 <td>
-                                    Nombre
+                                    {{item.name}}
                                 </td>
                                 <td>
-                                    Apellido
+                                    {{item.lastName}}
                                 </td>
                                 <td>
-                                    Fecha de nacimiento
+                                    {{dateHelper.formatWithMoment(item.birthDate)}}
                                 </td>
                                 <td>
-                                    Celular
+                                    {{item.mobilePhone}}
                                 </td>
                                 <td>
-                                    Telefono
+                                    {{item.phone}}
                                 </td>
                                 <td>
-                                    Direccion
+                                    {{addressHelper.format(item.addresses)}}
                                 </td>
                                 <td>
-                                    Identificacion
+                                    {{item.identifications[0].value}}
                                 </td>
                             </tr>
                         </tbody>
@@ -77,4 +77,8 @@
         </div>
     </div>
 </div>
-
+@section OwnScript{
+    <script src="~/js/util/DateHelper.js"></script>
+    <script src="~/js/util/AddressHelper.js"></script>
+    <script src="~/js/customer/index.js"></script>
+}

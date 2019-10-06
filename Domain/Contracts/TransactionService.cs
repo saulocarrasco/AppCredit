@@ -24,22 +24,19 @@ namespace Domain.Contracts
             _dbContext.Entry(model).State = EntityState.Modified;
         }
 
-        public Task<IEnumerable<TModel>> GetAll<TModel>(Expression<Func<TModel, bool>> where, string includes) where TModel : class, ITransactionEntity
+        public IEnumerable<TModel> GetAll<TModel>(Expression<Func<TModel, bool>> where, string includes) where TModel : class, ITransactionEntity
         {
-            return Task.Run(()=> {
+            var result = _dbContext.Set<TModel>().AsQueryable();
 
-                var result = _dbContext.Set<TModel>().AsQueryable();
+            foreach (var includeProperty in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                result = result.Include(includeProperty);
+            }
 
-                foreach (var includeProperty in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    result = result.Include(includeProperty);
-                }
+            if (where != null)
+                result = result.Where(where);
 
-                if (where != null)
-                    result = result.Where(where);
-
-                return result.AsEnumerable();
-            }); 
+            return result.AsEnumerable();
         }
 
         public async Task<TModel> Insert<TModel>(TModel model) where TModel : class, ITransactionEntity

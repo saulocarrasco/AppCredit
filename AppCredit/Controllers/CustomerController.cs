@@ -27,9 +27,11 @@ namespace AppCredit.Api.Controllers
 
         // GET: api/Addresses
         [HttpGet]
-        public Task<IEnumerable<Customer>> GetCustomers()
+        public IEnumerable<Customer> GetCustomers()
         {
-            return _genericService.GetAll<Customer>(null, "Addresses,Identifications,Credits");
+            var result = _genericService.GetAll<Customer>(null, "Addresses,Identifications,Loans");
+
+            return result;
         }
 
         [HttpPost("insert")]
@@ -42,7 +44,18 @@ namespace AppCredit.Api.Controllers
             customer.IsDeleted = false;
 
             var model = await _genericService.Insert(customer);
-            var changesResult = await _genericService.SavesChanges();
+            var changesResult = 0;
+
+            try
+            {
+                changesResult = await _genericService.SavesChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
 
             if (changesResult > 0)
             {
