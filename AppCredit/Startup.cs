@@ -52,7 +52,10 @@ namespace AppCredit
 
             AutoMapperConfig(services);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         private void AutoMapperConfig(IServiceCollection services)
