@@ -10,8 +10,8 @@
         </ul>`,
     props: {
         menuOptions: Array,
-        currentController: "",
-        currentAction: ""
+        currentController: String,
+        currentAction: String
     },
     methods: {
         setActualLink: function (item) {
@@ -20,12 +20,18 @@
                 return "nav-item active";
             }
 
+            if (this.isDefaultUri() && item === this.menuOptions[0]) {
+                return "nav-item active";
+            }
+
             return "nav-item";
         },
         getUri: function (item) {
-            var self = this;
-
             return `/${item.controller}/${item.action}`;
+        },
+        isDefaultUri: function () {
+            var self = this;
+            return self.currentController === "Home" && self.currentAction === "Index";
         }
     },
     mounted: function () {
