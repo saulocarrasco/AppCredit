@@ -29,7 +29,7 @@ namespace AppCredit.Api.Controllers
         [HttpGet]
         public IEnumerable<Customer> GetCustomers()
         {
-            var result = _genericService.GetAll<Customer>(null, "Addresses,Identifications,Loans");
+            var result = _genericService.GetAll<Customer>("Addresses,Identifications,Loans");
 
             return result;
         }
