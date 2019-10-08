@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AppCredit.Api.Dtos;
 using AutoMapper;
@@ -31,6 +32,15 @@ namespace AppCredit.Api.Controllers
         public Loan GetAmortization(LoanStartInformationDto loanStartInformationDto)
         {
             return _creditService.GetAmortization(loanStartInformationDto.Capital, loanStartInformationDto.BankRate, loanStartInformationDto.QuantityAliquot, loanStartInformationDto.Modality, loanStartInformationDto.StartDate);
+        }
+
+        public IEnumerable<Loan> GetLoansOfDate()
+        {
+            Expression<Func<Loan, bool>> expresionFilter = i => i.Begining.Date <= DateTimeOffset.UtcNow.AddHours(-4).Date
+            && i.End < DateTimeOffset.UtcNow.AddHours(-4) && i.FeeInformations.Any(f => f.Date == DateTimeOffset.UtcNow.AddHours(-4).Date);
+
+
+            return _genericService.GetAll("FeeInformations, Customer", expresionFilter);
         }
     }
 }

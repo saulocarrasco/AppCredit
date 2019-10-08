@@ -24,7 +24,7 @@ namespace Domain.Contracts
             _dbContext.Entry(model).State = EntityState.Modified;
         }
 
-        public IEnumerable<TModel> GetAll<TModel>(Expression<Func<TModel, bool>> where, string includes) where TModel : class, ITransactionEntity
+        public IEnumerable<TModel> GetAll<TModel>(string includes, Expression<Func<TModel, bool>> where = null) where TModel : class, ITransactionEntity
         {
             var result = _dbContext.Set<TModel>().AsQueryable();
 

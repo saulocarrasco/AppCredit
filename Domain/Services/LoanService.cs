@@ -74,5 +74,10 @@ namespace Domain.Services
 
             return loan;
         }
+
+        public IEnumerable<Loan> GetCurrentLoans()
+        {
+            return null;
+        }
     }
 }
