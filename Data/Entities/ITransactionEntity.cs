@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public interface ITransactionEntity
+    public abstract class TransactionEntity
     {
-        int Id { get; set; }
-        bool IsDeleted { get; set; } 
-        DateTimeOffset? CreationDate { get; set; }
-        DateTimeOffset? DeletedDate { get; set; }
+        public int Id { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public DateTimeOffset? CreationDate { get; set; }
+        public DateTimeOffset? DeletedDate { get; set; }
     }
 }

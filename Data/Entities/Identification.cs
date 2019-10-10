@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public class Identification : ITransactionEntity
+    public class Identification : TransactionEntity
     {
         public Doctype Doctype { get; set; }
         public string Value { get; set; }

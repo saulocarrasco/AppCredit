@@ -18,13 +18,13 @@ namespace Domain.Contracts
             _dbContext = dbContext;
         }
 
-        public void Delete<TModel>(TModel model) where TModel : class, ITransactionEntity
+        public void Delete<TModel>(TModel model) where TModel : TransactionEntity
         {
             model.IsDeleted = true;
             _dbContext.Entry(model).State = EntityState.Modified;
         }
 
-        public IEnumerable<TModel> GetAll<TModel>(string includes, Expression<Func<TModel, bool>> where = null) where TModel : class, ITransactionEntity
+        public IEnumerable<TModel> GetAll<TModel>(string includes, Expression<Func<TModel, bool>> where = null) where TModel : TransactionEntity
         {
             var result = _dbContext.Set<TModel>().AsQueryable();
 
@@ -39,7 +39,7 @@ namespace Domain.Contracts
             return result.AsEnumerable();
         }
 
-        public async Task<TModel> Insert<TModel>(TModel model) where TModel : class, ITransactionEntity
+        public async Task<TModel> Insert<TModel>(TModel model) where TModel : TransactionEntity
         {
             await _dbContext.Set<TModel>().AddAsync(model);
 
@@ -51,7 +51,7 @@ namespace Domain.Contracts
             return await _dbContext.SaveChangesAsync();
         }
 
-        public void Update<TModel>(TModel model) where TModel : class, ITransactionEntity
+        public void Update<TModel>(TModel model) where TModel : TransactionEntity
         {
             _dbContext.Entry(model).State = EntityState.Modified;
         }

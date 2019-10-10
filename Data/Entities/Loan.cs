@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public class Loan : ITransactionEntity
+    public class Loan : TransactionEntity
     {
         public int Id { get; set; }
         public bool IsDeleted { get; set; }

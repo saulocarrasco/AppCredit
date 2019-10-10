@@ -37,7 +37,8 @@ namespace AppCredit
             services.AddTransient<GenericService, GenericService>();
             services.AddTransient<ILoanService, LoanService>();
 
-            services.AddDbContext<DbContext, AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DbContext, AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+                x => x.MigrationsAssembly("AppCredit.Api")));
 
             services.AddCors(options =>
             {
