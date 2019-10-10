@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public abstract class Person : ITransactionEntity
+    public abstract class Person : TransactionEntity
     {
         public string Name { get; set; }
         public string LastName { get; set; }

@@ -14,11 +14,11 @@ namespace AppCredit.Api.ProfilesConfig
         public CustomerProfile()
         {
 
-            CreateMap<CustomerDto, Customer>().ForMember(dest => dest.CreationDate, opts => opts.MapFrom(src => DelegateHelper.DateHandler(src.CreationDate)));
-            CreateMap<CustomerDto, Customer>().ForMember(dest => dest.BirthDate, opts => opts.MapFrom(src => DelegateHelper.DateHandler(src.BirthDate)));
-            CreateMap<CustomerDto, Customer>().ForMember(dest => dest.DeletedDate, opts => opts.MapFrom(src => DelegateHelper.DateHandler(src.DeletedDate)));
-
-            CreateMap<CustomerDto, Customer>().ForMember(dest => dest.Addresses,
+            CreateMap<CustomerDto, Customer>()
+            .ForMember(dest => dest.CreationDate, opts => opts.MapFrom(src => DelegateHelper.DateHandler(src.CreationDate)))
+            .ForMember(dest => dest.BirthDate, opts => opts.MapFrom(src => DelegateHelper.DateHandler(src.BirthDate)))
+            .ForMember(dest => dest.DeletedDate, opts => opts.MapFrom(src => DelegateHelper.DateHandler(src.DeletedDate)))
+            .ForMember(dest => dest.Addresses,
                 opts => opts.MapFrom(src => new Address
                 {
                     City = src.City,
@@ -27,9 +27,8 @@ namespace AppCredit.Api.ProfilesConfig
                     CreationDate = DelegateHelper.DateHandler(src.CreationDate),
                     DeletedDate = DelegateHelper.DateHandler(src.DeletedDate),
                     IsDeleted = src.IsDeleted
-                }));
-
-            CreateMap<CustomerDto, Customer>().ForMember(dest => dest.Identifications,
+                }))
+            .ForMember(dest => dest.Identifications,
                 opts => opts.MapFrom(src => new List<Identification>
                 {
                    new Identification

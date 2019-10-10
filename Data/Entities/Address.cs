@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public class Address : ITransactionEntity
+    public class Address : TransactionEntity
     {
         public string Street { get; set; }
         public string City { get; set; }
