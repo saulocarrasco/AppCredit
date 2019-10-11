@@ -14,6 +14,8 @@
                 dateHelper: Object
             },
             loanInformation: {},
+            customers: {},
+            customerId: 0
         };
     },
     methods: {
@@ -37,12 +39,61 @@
                 console.log(errors);
             });
         },
+        loadCustomers: function () {
+            var self = this;
+
+            const config = { headers: { 'Content-Type': 'application/json' } };
+
+            var endPoint = '/customer/';
+
+            instance.get(
+                endPoint,
+                config
+            ).then(function (response) {
+
+                self.customers = response.data;
+
+            }).catch(function (errors) {
+
+                console.log(errors);
+
+            });
+        },
         ingrementIndex: function (index) {
             return index += 1;
+        },
+        createLoan: function () {
+
+            var self = this;
+
+            const config = { headers: { 'Content-Type': 'application/json' } };
+
+            var endPoint = '/creatLoan/';
+
+            loadInformations = {
+                basicInfoLoad: self.basicInfoLoad,
+                loanInformation: self.loanInformation,
+                customerId: self.customerId
+            };
+
+            instance.post(
+                endPoint,
+                config,
+                loadInformations
+            ).then(function (response) {
+
+                window.location = '/loan/';
+
+            }).catch(function (errors) {
+
+                console.log(errors);
+
+            });
         }
     },
     mounted: function () {
         self = this;
         self.dateHelper = new DateHelper();
+        self.loadCustomers();
     }
 });

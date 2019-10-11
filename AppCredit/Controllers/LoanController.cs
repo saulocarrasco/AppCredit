@@ -42,5 +42,11 @@ namespace AppCredit.Api.Controllers
 
             return _genericService.GetAll("FeeInformations, Customer", expresionFilter);
         }
+
+        [HttpPost]
+        public void CreateLoan()
+        {
+           
+        }
     }
 }
