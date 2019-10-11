@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Data.Entities
 {
-    public abstract class Person : TransactionEntity
+    public class Person : TransactionEntity
     {
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -14,9 +14,5 @@ namespace Data.Entities
         public IEnumerable<Address> Addresses { get; set; }
         public IEnumerable<Identification> Identifications { get; set; }
         public IEnumerable<Loan> Loans { get; set; }
-        public int Id { get ; set ; }
-        public bool IsDeleted { get; set; }
-        public DateTimeOffset? CreationDate { get ; set ; }
-        public DateTimeOffset? DeletedDate { get ; set; }
     }
 }

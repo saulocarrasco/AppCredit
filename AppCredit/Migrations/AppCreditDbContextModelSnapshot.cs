@@ -44,7 +44,7 @@ namespace AppCredit.Api.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Data.Entities.Customer", b =>
@@ -72,7 +72,7 @@ namespace AppCredit.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Data.Entities.FeeInformation", b =>
@@ -106,7 +106,7 @@ namespace AppCredit.Api.Migrations
 
                     b.HasIndex("LoanId");
 
-                    b.ToTable("FeeInformation");
+                    b.ToTable("FeeInformations");
                 });
 
             modelBuilder.Entity("Data.Entities.Identification", b =>
@@ -132,7 +132,7 @@ namespace AppCredit.Api.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Identification");
+                    b.ToTable("Identifications");
                 });
 
             modelBuilder.Entity("Data.Entities.Loan", b =>
@@ -166,7 +166,7 @@ namespace AppCredit.Api.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Loan");
+                    b.ToTable("Loans");
                 });
 
             modelBuilder.Entity("Data.Entities.Address", b =>

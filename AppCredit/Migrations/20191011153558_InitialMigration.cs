@@ -9,76 +9,76 @@ namespace AppCredit.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
+                    DeletedDate = table.Column<DateTimeOffset>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     BirthDate = table.Column<DateTimeOffset>(nullable: false),
                     MobilePhone = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
-                    DeletedDate = table.Column<DateTimeOffset>(nullable: true)
+                    PhoneNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Address",
+                name: "Addresses",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
+                    DeletedDate = table.Column<DateTimeOffset>(nullable: true),
                     Street = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Region = table.Column<string>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
-                    DeletedDate = table.Column<DateTimeOffset>(nullable: true),
                     CustomerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Address_Customer_CustomerId",
+                        name: "FK_Addresses_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Identification",
+                name: "Identifications",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Doctype = table.Column<int>(nullable: false),
-                    Value = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     CreationDate = table.Column<DateTimeOffset>(nullable: false),
                     DeletedDate = table.Column<DateTimeOffset>(nullable: true),
+                    Doctype = table.Column<int>(nullable: false),
+                    Value = table.Column<string>(nullable: true),
                     CustomerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Identification", x => x.Id);
+                    table.PrimaryKey("PK_Identifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Identification_Customer_CustomerId",
+                        name: "FK_Identifications_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Loan",
+                name: "Loans",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -96,80 +96,80 @@ namespace AppCredit.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Loan", x => x.Id);
+                    table.PrimaryKey("PK_Loans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Loan_Customer_CustomerId",
+                        name: "FK_Loans_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "FeeInformation",
+                name: "FeeInformations",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
+                    DeletedDate = table.Column<DateTimeOffset>(nullable: true),
                     LoanId = table.Column<int>(nullable: true),
                     Number = table.Column<int>(nullable: false),
                     Date = table.Column<DateTimeOffset>(nullable: false),
                     TotalFee = table.Column<decimal>(nullable: false),
                     CurrentAmount = table.Column<decimal>(nullable: false),
                     CapitalPayment = table.Column<decimal>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CreationDate = table.Column<DateTimeOffset>(nullable: false),
-                    DeletedDate = table.Column<DateTimeOffset>(nullable: true),
                     RateAmount = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FeeInformation", x => x.Id);
+                    table.PrimaryKey("PK_FeeInformations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FeeInformation_Loan_LoanId",
+                        name: "FK_FeeInformations_Loans_LoanId",
                         column: x => x.LoanId,
-                        principalTable: "Loan",
+                        principalTable: "Loans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_CustomerId",
-                table: "Address",
+                name: "IX_Addresses_CustomerId",
+                table: "Addresses",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FeeInformation_LoanId",
-                table: "FeeInformation",
+                name: "IX_FeeInformations_LoanId",
+                table: "FeeInformations",
                 column: "LoanId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Identification_CustomerId",
-                table: "Identification",
+                name: "IX_Identifications_CustomerId",
+                table: "Identifications",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Loan_CustomerId",
-                table: "Loan",
+                name: "IX_Loans_CustomerId",
+                table: "Loans",
                 column: "CustomerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Address");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "FeeInformation");
+                name: "FeeInformations");
 
             migrationBuilder.DropTable(
-                name: "Identification");
+                name: "Identifications");
 
             migrationBuilder.DropTable(
-                name: "Loan");
+                name: "Loans");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Customers");
         }
     }
 }
