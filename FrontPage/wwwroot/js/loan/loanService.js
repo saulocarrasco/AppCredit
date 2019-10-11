@@ -27,7 +27,7 @@
 
             const config = { headers: { 'Content-Type': 'application/json' } };
 
-            var endPoint = 'loan/';
+            var endPoint = 'loan/getamortization/';
 
             instance.post(
                 endPoint,
@@ -62,16 +62,18 @@
         ingrementIndex: function (index) {
             return index += 1;
         },
-        createLoan: function () {
+        createLoan: function (e) {
+
+            e.preventDefault();
 
             var self = this;
 
             const config = { headers: { 'Content-Type': 'application/json' } };
 
-            var endPoint = '/creatLoan/';
+            var endPoint = 'loan/createloan/';
 
-            loadInformations = {
-                basicInfoLoad: self.basicInfoLoad,
+            loanInformationDto = {
+                basicInfoLoan: self.basicInfoLoad,
                 loanInformation: self.loanInformation,
                 customerId: self.customerId
             };
@@ -79,7 +81,7 @@
             instance.post(
                 endPoint,
                 config,
-                loadInformations
+                loanInformationDto
             ).then(function (response) {
 
                 window.location = '/loan/';
