@@ -69,6 +69,7 @@
     mounted: function () {
         self = this;
         self.dateHelper = new DateHelper();
+        self.loanHelper = new LoanHelper();
         self.loadLoan();
     }
 });
