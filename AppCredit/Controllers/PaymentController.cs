@@ -31,7 +31,7 @@ namespace AppCredit.Api.Controllers
         public IEnumerable<Payment> GetPaymentsDate()
         {
             Expression<Func<Payment, bool>> where = i => i.Date.Date == DateTimeOffset.UtcNow.AddHours(-4).Date;
-            var result = _genericService.GetAll(where: where);
+            var result = _genericService.GetAll("Loan,Loan.Customer", where: where);
 
             return result;
         }

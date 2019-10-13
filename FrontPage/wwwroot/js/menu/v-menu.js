@@ -15,7 +15,11 @@
     },
     methods: {
         setActualLink: function (item) {
-       
+
+            if (window.location.pathname  === "/" && item.text === "Dashboard") {
+                return "nav-item active";
+            }
+
             if (window.location.href.includes(item.controller) && window.location.href.includes(item.action)) {
                 return "nav-item active";
             }
