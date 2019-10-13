@@ -66,8 +66,8 @@
                                     <td>
                                         {{item.grossProfit}}
                                     </td>
-                                    <td>
-                                        <a href="d">Realizar pago<i class="material-icons">attach_money</i></a>
+                                    <td v-on:click="goDetail(item.id)" style="cursor: pointer;">
+                                        <a>Realizar pago<i class="material-icons">attach_money</i></a>
                                     </td>
                                 </tr>
                             </tbody>

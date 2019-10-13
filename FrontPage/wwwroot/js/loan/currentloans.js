@@ -34,6 +34,9 @@
 
             });
 
+        },
+        goDetail: function (id) {
+            window.location = `LoanDetail/${id}`;
         }
 
     },

@@ -17,5 +17,10 @@ namespace FrontPage.Controllers
         {
             return View();
         }
+
+        public IActionResult LoanDetail(int id)
+        {
+            return View();
+        }
     }
 }
