@@ -2,75 +2,128 @@
     ViewData["Title"] = "Inicio";
     ViewData["CurrentLocation"] = "Inicio";
 }
-<div class="row" id="rootElement">
-    <div class="col-lg-6 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header card-header-info card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">credit_card</i>
+    <div id="rootElement">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">credit_card</i>
+                        </div>
+                        <p class="card-category">Prestamos</p>
+                        <h3 class="card-title">
+                            <small>Prestamos actuales </small>{{loans.length}}
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-info">info</i>
+                        </div>
+                    </div>
                 </div>
-                <p class="card-category">Prestamos</p>
-                <h3 class="card-title">
-                    49
-                    <small>Prestamos actuales</small>
-                </h3>
             </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons text-info">info</i>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">face</i>
+                        </div>
+                        <p class="card-category">Clientes</p>
+                        <h3 class="card-title"><small>Cantidad de clientes activos </small>{{customers.length}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">people</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">info_outline</i>
+                        </div>
+                        <p class="card-category">Fixed Issues</p>
+                        <h3 class="card-title">75</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i> Tracked from Github
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <p class="card-category">Followers</p>
+                        <h3 class="card-title">+245</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">update</i> Just Updated
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+        <div class="row" v-if="paymentsDate && paymentsDate.length > 0">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title ">Pagos del dia</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-dark">
+                                    <tr>
+                                        <th>
+                                            Cantidad pagada
+                                        </th>
+                                        <th>
+                                            Total Capital
+                                        </th>
+                                        <th>
+                                            Ganancia
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-if="index < paymentsDate.length" v-for="(item, index) in paymentsDate" :key="index">
+                                        <td>
+                                            {{item.totalAmount}}
+                                        </td>
+                                        <td>
+                                            {{item.capitalPayment}}
+                                        </td>
+                                        <td>
+                                            {{item.profit}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            Ganancias del dia: {{getProfits()}}
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-6">
-        <div class="card card-stats">
-            <div class="card-header card-header-success card-header-icon">
-                <div class="card-icon">
-                    <i class="material-icons">face</i>
-                </div>
-                <p class="card-category">Clientes</p>
-                <h3 class="card-title">20 <small>Cantidad de clientes activos</small></h3>
-            </div>
-            <div class="card-footer">
-                <div class="stats">
-                    <i class="material-icons">people</i>
-                </div>
-            </div>
-        </div>
-    </div>
-    @*<div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                    <div class="card-icon">
-                        <i class="material-icons">info_outline</i>
-                    </div>
-                    <p class="card-category">Fixed Issues</p>
-                    <h3 class="card-title">75</h3>
-                </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">local_offer</i> Tracked from Github
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-                <div class="card-header card-header-info card-header-icon">
-                    <div class="card-icon">
-                        <i class="fa fa-twitter"></i>
-                    </div>
-                    <p class="card-category">Followers</p>
-                    <h3 class="card-title">+245</h3>
-                </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">update</i> Just Updated
-                    </div>
-                </div>
-            </div>
-        </div>*@
-</div>
+  
+
+
 @section OwnScript{
     <script src="~/js/home/dashboard.js"></script>
 }

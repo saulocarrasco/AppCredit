@@ -84,7 +84,6 @@
             });
 
         }
-
     },
     mounted: function () {
     },

@@ -12,13 +12,14 @@ namespace Data.Entities
         public DateTimeOffset? DeletedDate { get; set; }
         public int? CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public double LoanAmount { get; set; }
+        public decimal LoanAmount { get; set; }
         public int FeesNumber { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         //Utility
-        public double GrossProfit { get; set; }
+        public decimal GrossProfit { get; set; }
         public DateTimeOffset Begining { get; set; }
         public DateTimeOffset End { get; set; }
         public IEnumerable<FeeInformation> FeeInformations { get; set; }
+        public double BankRate { get; set; }
     }
 }

@@ -58,10 +58,10 @@ new Vue({
                     icon: 'person'
                 },
                 {
-                    text: 'Prestamos',
+                    text: 'Crear prestamo',
                     controller: 'Loan',
                     action: 'Index',
-                    icon: 'content_paste'
+                    icon: 'account_balance_wallet'
                 },
                 {
                     text: 'Prestamos Actuales',

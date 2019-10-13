@@ -4,14 +4,16 @@ using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AppCredit.Api.Migrations
 {
     [DbContext(typeof(AppCreditDbContext))]
-    partial class AppCreditDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191013164028_FixTypeOfBasicInfoLoan")]
+    partial class FixTypeOfBasicInfoLoan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,36 +175,6 @@ namespace AppCredit.Api.Migrations
                     b.ToTable("Loans");
                 });
 
-            modelBuilder.Entity("Data.Entities.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("CapitalPayment");
-
-                    b.Property<DateTimeOffset?>("CreationDate")
-                        .IsRequired();
-
-                    b.Property<DateTimeOffset>("Date");
-
-                    b.Property<DateTimeOffset?>("DeletedDate");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<int>("LoanId");
-
-                    b.Property<decimal>("Profit");
-
-                    b.Property<decimal>("TotalAmount");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LoanId");
-
-                    b.ToTable("Payments");
-                });
-
             modelBuilder.Entity("Data.Entities.Address", b =>
                 {
                     b.HasOne("Data.Entities.Customer", "Customer")
@@ -229,14 +201,6 @@ namespace AppCredit.Api.Migrations
                     b.HasOne("Data.Entities.Customer", "Customer")
                         .WithMany("Loans")
                         .HasForeignKey("CustomerId");
-                });
-
-            modelBuilder.Entity("Data.Entities.Payment", b =>
-                {
-                    b.HasOne("Data.Entities.Loan", "Loan")
-                        .WithMany()
-                        .HasForeignKey("LoanId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

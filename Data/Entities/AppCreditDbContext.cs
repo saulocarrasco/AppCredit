@@ -23,6 +23,7 @@ namespace Data.Entities
             modelBuilder.ApplyConfiguration(new FeeInformationTableConfiguration());
             modelBuilder.ApplyConfiguration(new IdentificationTableConfiguration());
             modelBuilder.ApplyConfiguration(new LoanTableConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentTableConfigurations());
         } 
 
     }

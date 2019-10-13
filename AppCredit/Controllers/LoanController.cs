@@ -38,12 +38,16 @@ namespace AppCredit.Api.Controllers
         public IEnumerable<Loan> GetLoansOfDate()
         {
             Expression<Func<Loan, bool>> expresionFilter = i => i.Begining.Date <= DateTimeOffset.UtcNow.AddHours(-4).Date
-            && i.End < DateTimeOffset.UtcNow.AddHours(-4) && i.FeeInformations.Any(f => f.Date == DateTimeOffset.UtcNow.AddHours(-4).Date);
-
-            expresionFilter = null;
+            && i.End > DateTimeOffset.UtcNow.AddHours(-4) && i.FeeInformations.Any(f => f.FeeState == FeeState.Pending);
 
 
             return _genericService.GetAll("FeeInformations,Customer", expresionFilter);
+        }
+
+        [HttpGet("getloan/{id}")]
+        public Loan GetLoan(int id)
+        {
+            return _genericService.Get<Loan>("FeeInformations,Customer", i=>i.Id == id);
         }
 
         [HttpPost("createloan")]
@@ -57,10 +61,37 @@ namespace AppCredit.Api.Controllers
                 FeeInformations = loanInformationDto.LoanInformation,
                 PaymentMethod = (PaymentMethod)loanInformationDto.BasicInfoLoan.Modality,
                 FeesNumber = loanInformationDto.BasicInfoLoan.QuantityAliquot,
-              //  LoanAmount = loanInformationDto.BasicInfoLoan.Capital
+                LoanAmount = loanInformationDto.BasicInfoLoan.Capital,
+                GrossProfit = loanInformationDto.LoanInformation.Sum(i=>i.TotalFee),
+                End = loanInformationDto.LoanInformation.LastOrDefault().Date,
+                BankRate = loanInformationDto.BasicInfoLoan.BankRate
             };
 
             await _genericService.Insert(loan);
+
+            await _genericService.SavesChanges();
+        }
+
+        [HttpPost("payFee")]
+        public async Task PayFee(FeeInformationDto feeInformation)
+        {
+            Expression<Func<FeeInformation, bool>> where = i => i.Id == feeInformation.Id && i.LoanId == feeInformation.LoanId;
+            var fee = _genericService.Get(where: where);
+            fee.FeeState = FeeState.PaidOut;
+
+            var payment = new Payment
+            {
+                TotalAmount = fee.TotalFee,
+                CapitalPayment = fee.CapitalPayment,
+                Profit = fee.RateAmount,
+                LoanId = fee.LoanId.Value,
+                Date = DateTimeOffset.UtcNow.AddHours(-4),
+                CreationDate = DateTimeOffset.UtcNow.AddHours(-4)
+            };
+
+            _genericService.Update(fee);
+
+            await _genericService.Insert(payment);
 
             await _genericService.SavesChanges();
         }
