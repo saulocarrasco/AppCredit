@@ -4,7 +4,9 @@
     data: function () {
         return {
             loans: {},
-            customers: {}
+            customers: {},
+            paymentsDate: {},
+            profit: 0
         };
     },
     methods: {
@@ -49,11 +51,42 @@
                 console.log(errors);
 
             });
+        },
+        loadPaymentsDate: function () {
+            var self = this;
+
+            const config = { headers: { 'Content-Type': 'application/json' } };
+
+            var endPoint = 'payment/getpaymentsdate/';
+
+            instance.get(
+                endPoint,
+                config
+            ).then(function (response) {
+
+                self.paymentsDate = response.data;
+
+            }).catch(function (errors) {
+
+                console.log(errors);
+
+            });
+        },
+        getProfits: function () {
+            var self = this;
+            var profit = 0;
+
+            for (var i = 0; i < self.paymentsDate.length; i++) {
+                profit += self.paymentsDate[0].profit;
+            }
+
+            return profit.toFixed(2);
         }
     },
     mounted: function () {
         var self = this;
         self.loadLoans();
         self.loadCustomers();
+        self.loadPaymentsDate();
     }
 });
