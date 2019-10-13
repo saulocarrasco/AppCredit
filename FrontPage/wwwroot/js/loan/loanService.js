@@ -14,6 +14,8 @@
                 dateHelper: Object
             },
             loanInformation: {},
+            customers: {},
+            customerId: 0
         };
     },
     methods: {
@@ -25,7 +27,7 @@
 
             const config = { headers: { 'Content-Type': 'application/json' } };
 
-            var endPoint = 'loan/';
+            var endPoint = 'loan/getamortization/';
 
             instance.post(
                 endPoint,
@@ -37,12 +39,63 @@
                 console.log(errors);
             });
         },
+        loadCustomers: function () {
+            var self = this;
+
+            const config = { headers: { 'Content-Type': 'application/json' } };
+
+            var endPoint = '/customer/';
+
+            instance.get(
+                endPoint,
+                config
+            ).then(function (response) {
+
+                self.customers = response.data;
+
+            }).catch(function (errors) {
+
+                console.log(errors);
+
+            });
+        },
         ingrementIndex: function (index) {
             return index += 1;
+        },
+        createLoan: function (e) {
+
+            e.preventDefault();
+
+            var self = this;
+
+            const config = { headers: { 'Content-Type': 'application/json' } };
+
+            var endPoint = 'loan/createloan/';
+
+            var loanInformationDto = {
+                basicInfoLoan: self.basicInfoLoad,
+                loanInformation: self.loanInformation,
+                customerId: self.customerId
+            };
+
+            instance.post(
+                endPoint,
+                loanInformationDto,
+                config
+            ).then(function (response) {
+
+                window.location = '/Currentloans/';
+
+            }).catch(function (errors) {
+
+                console.log(errors);
+
+            });
         }
     },
     mounted: function () {
         self = this;
         self.dateHelper = new DateHelper();
+        self.loadCustomers();
     }
 });

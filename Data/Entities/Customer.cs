@@ -6,6 +6,5 @@ namespace Data.Entities
 {
     public class Customer : Person
     {
-        
     }
 }

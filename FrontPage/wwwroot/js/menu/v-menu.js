@@ -62,7 +62,14 @@ new Vue({
                     controller: 'Loan',
                     action: 'Index',
                     icon: 'content_paste'
-                }]
+                },
+                {
+                    text: 'Prestamos Actuales',
+                    controller: 'Loan',
+                    action: 'CurrentLoans',
+                    icon: 'list'
+                }
+            ]
         };
     }
 });

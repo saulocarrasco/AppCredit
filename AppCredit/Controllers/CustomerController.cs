@@ -38,16 +38,19 @@ namespace AppCredit.Api.Controllers
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> Insert([FromBody]CustomerDto customerDto)
         {
-            var customer = _mapper.Map<Customer>(customerDto);
-
-            customer.CreationDate = DateTimeOffset.UtcNow.AddHours(-4);
-            customer.IsDeleted = false;
-
-            var model = await _genericService.Insert(customer);
+            
             var changesResult = 0;
+            Customer model = null;
 
             try
             {
+                var customer = _mapper.Map<Customer>(customerDto);
+
+                customer.CreationDate = DateTimeOffset.UtcNow.AddHours(-4);
+                customer.IsDeleted = false;
+
+                model = await _genericService.Insert(customer);
+
                 changesResult = await _genericService.SavesChanges();
             }
             catch (Exception ex)

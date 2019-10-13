@@ -12,5 +12,10 @@ namespace FrontPage.Controllers
         {
             return View();
         }
+
+        public IActionResult CurrentLoans()
+        {
+            return View();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,7 @@ namespace Data.TableConfigurations
     {
         public override void Configure(EntityTypeBuilder<Address> builder)
         {
-            builder.HasQueryFilter(i => i.IsDeleted == false);
-
+            builder.ToTable("Addresses");
             CommonColumnsConfiguration(builder);
         }
     }

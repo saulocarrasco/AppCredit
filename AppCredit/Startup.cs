@@ -37,7 +37,7 @@ namespace AppCredit
             services.AddTransient<GenericService, GenericService>();
             services.AddTransient<ILoanService, LoanService>();
 
-            services.AddDbContext<DbContext, AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+            services.AddDbContext<DbContext, AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 x => x.MigrationsAssembly("AppCredit.Api")));
 
             services.AddCors(options =>
@@ -58,6 +58,7 @@ namespace AppCredit
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
         }
 
         private void AutoMapperConfig(IServiceCollection services)
@@ -80,9 +81,11 @@ namespace AppCredit
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
