@@ -34,19 +34,35 @@ namespace AppCredit.Api.Controllers
             return _creditService.GetAmortization(loanStartInformationDto.Capital, loanStartInformationDto.BankRate, loanStartInformationDto.QuantityAliquot, loanStartInformationDto.Modality, loanStartInformationDto.StartDate);
         }
 
+        [HttpGet("getloansofdate")]
         public IEnumerable<Loan> GetLoansOfDate()
         {
             Expression<Func<Loan, bool>> expresionFilter = i => i.Begining.Date <= DateTimeOffset.UtcNow.AddHours(-4).Date
             && i.End < DateTimeOffset.UtcNow.AddHours(-4) && i.FeeInformations.Any(f => f.Date == DateTimeOffset.UtcNow.AddHours(-4).Date);
 
+            expresionFilter = null;
 
-            return _genericService.GetAll("FeeInformations, Customer", expresionFilter);
+
+            return _genericService.GetAll("FeeInformations,Customer", expresionFilter);
         }
 
         [HttpPost("createloan")]
-        public void CreateLoan(LoanInformationDto loanInformationDto)
+        public async Task CreateLoan(LoanInformationDto loanInformationDto)
         {
-           
+            var loan = new Loan
+            {
+                CustomerId = loanInformationDto.CustomerId,
+                CreationDate = DateTimeOffset.UtcNow.AddHours(-4),
+                Begining = loanInformationDto.BasicInfoLoan.StartDate,
+                FeeInformations = loanInformationDto.LoanInformation,
+                PaymentMethod = (PaymentMethod)loanInformationDto.BasicInfoLoan.Modality,
+                FeesNumber = loanInformationDto.BasicInfoLoan.QuantityAliquot,
+              //  LoanAmount = loanInformationDto.BasicInfoLoan.Capital
+            };
+
+            await _genericService.Insert(loan);
+
+            await _genericService.SavesChanges();
         }
     }
 }

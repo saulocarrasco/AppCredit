@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Prestamos actuales";
+}
+
+<h2>Prestamos actuales</h2>
+
+<div id="rootElement">
+    <div class="row" v-if="loans && loans.length > 0">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Información de prestamo</h4>
+                    <p class="card-category"></p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <tr>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Capital prestado
+                                    </th>
+                                    <th>
+                                        Cantidad de cuotas
+                                    </th>
+                                    <th>
+                                        Metodo de pago
+                                    </th>
+                                    <th>
+                                        Fecha primera cuota
+                                    </th>
+                                    <th>
+                                        Fecha ultima cuota
+                                    </th>
+                                    <th>
+                                        Ganancia
+                                    </th>
+                                    <th>
+                                        Opcion
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item, index) in loans" :key="index">
+                                    <td>
+                                        {{item.customer.name+' '+item.customer.lastName}}
+                                    </td>
+                                    <td>
+                                        {{item.loanAmount}}
+                                    </td>
+                                    <td>
+                                        {{item.feesNumber}}
+                                    </td>
+                                    <td>
+                                        {{item.paymentMethod}}
+                                    </td>
+                                    <td>
+                                        {{dateHelper.formatWithMoment(item.begining)}}
+                                    </td>
+                                    <td>
+                                        {{dateHelper.formatWithMoment(item.end)}}
+                                    </td>
+                                    <td>
+                                        {{item.grossProfit}}
+                                    </td>
+                                    <td>
+                                        <a href="d">Realizar pago<i class="material-icons">attach_money</i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section OwnScript{
+    <script src="~/js/util/DateHelper.js"></script>
+    <script src="~/js/loan/currentloans.js"></script>
+}

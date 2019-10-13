@@ -72,7 +72,7 @@
 
             var endPoint = 'loan/createloan/';
 
-            loanInformationDto = {
+            var loanInformationDto = {
                 basicInfoLoan: self.basicInfoLoad,
                 loanInformation: self.loanInformation,
                 customerId: self.customerId
@@ -80,11 +80,11 @@
 
             instance.post(
                 endPoint,
-                config,
-                loanInformationDto
+                loanInformationDto,
+                config
             ).then(function (response) {
 
-                window.location = '/loan/';
+                window.location = '/Currentloans/';
 
             }).catch(function (errors) {
 
