@@ -20,5 +20,6 @@ namespace Data.Entities
         public DateTimeOffset Begining { get; set; }
         public DateTimeOffset End { get; set; }
         public IEnumerable<FeeInformation> FeeInformations { get; set; }
+        public double BankRate { get; set; }
     }
 }

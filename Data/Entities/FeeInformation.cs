@@ -4,6 +4,11 @@ using System.Text;
 
 namespace Data.Entities
 {
+    public enum FeeState
+    {
+        PaidOut,
+        Pending
+    }
     public class FeeInformation : TransactionEntity
     {
         public int? LoanId { get; set; }
@@ -14,5 +19,6 @@ namespace Data.Entities
         public decimal CurrentAmount { get; set; }
         public decimal CapitalPayment{get;set;}
         public decimal RateAmount { get; set; }
+        public FeeState FeeState { get; set; } = FeeState.Pending;
     }
 }

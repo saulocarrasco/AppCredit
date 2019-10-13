@@ -46,6 +46,12 @@ namespace AppCredit.Api.Controllers
             return _genericService.GetAll("FeeInformations,Customer", expresionFilter);
         }
 
+        [HttpGet("getloan/{id}")]
+        public Loan GetLoan(int id)
+        {
+            return _genericService.Get<Loan>("FeeInformations,Customer", i=>i.Id == id);
+        }
+
         [HttpPost("createloan")]
         public async Task CreateLoan(LoanInformationDto loanInformationDto)
         {

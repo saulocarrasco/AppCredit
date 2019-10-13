@@ -61,7 +61,7 @@ new Vue({
                     text: 'Prestamos',
                     controller: 'Loan',
                     action: 'Index',
-                    icon: 'content_paste'
+                    icon: 'account_balance_wallet'
                 },
                 {
                     text: 'Prestamos Actuales',
