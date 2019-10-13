@@ -70,5 +70,15 @@ namespace AppCredit.Api.Controllers
 
             await _genericService.SavesChanges();
         }
+
+        [HttpPost("payFee")]
+        public async Task PayFee(FeeInformationDto feeInformation)
+        {
+            Expression<Func<FeeInformation, bool>> where = i => i.Id == feeInformation.Id && i.LoanId == feeInformation.LoanId;
+            var fee = _genericService.Get(where: where);
+            fee.FeeState = FeeState.PaidOut;
+            _genericService.Update(fee);
+            await _genericService.SavesChanges();
+        }
     }
 }

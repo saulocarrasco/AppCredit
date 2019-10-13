@@ -18,13 +18,16 @@ namespace Domain.Contracts
             _dbContext = dbContext;
         }
 
-        public TModel Get<TModel>(string includes, Expression<Func<TModel, bool>> where = null) where TModel : TransactionEntity
+        public TModel Get<TModel>(string includes = null, Expression<Func<TModel, bool>> where = null) where TModel : TransactionEntity
         {
             var result = _dbContext.Set<TModel>().AsQueryable();
 
-            foreach (var includeProperty in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            if (!string.IsNullOrEmpty(includes))
             {
-                result = result.Include(includeProperty);
+                foreach (var includeProperty in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    result = result.Include(includeProperty);
+                }
             }
 
             return result.FirstOrDefault(where.Compile());
@@ -36,15 +39,18 @@ namespace Domain.Contracts
             _dbContext.Entry(model).State = EntityState.Modified;
         }
 
-        public IEnumerable<TModel> GetAll<TModel>(string includes, Expression<Func<TModel, bool>> where = null) where TModel : TransactionEntity
+        public IEnumerable<TModel> GetAll<TModel>(string includes = null, Expression<Func<TModel, bool>> where = null) where TModel : TransactionEntity
         {
             var result = _dbContext.Set<TModel>().AsQueryable();
 
-            foreach (var includeProperty in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            if(!string.IsNullOrEmpty(includes))
             {
-                result = result.Include(includeProperty);
+                foreach (var includeProperty in includes.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    result = result.Include(includeProperty);
+                }
             }
-
+            
             if (where != null)
                 result = result.Where(where);
 

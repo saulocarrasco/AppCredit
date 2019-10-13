@@ -6,8 +6,8 @@ namespace Data.Entities
 {
     public enum FeeState
     {
-        PaidOut,
-        Pending
+        Pending,
+        PaidOut
     }
     public class FeeInformation : TransactionEntity
     {

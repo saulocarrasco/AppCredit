@@ -5,15 +5,9 @@
     },
     data: function () {
         return {
-            basicInfoLoad: {
-                capital: 0,
-                bankRate: 0.0,
-                quantityAliquot: 0,
-                modality: 0,
-                startDate: '',
-                dateHelper: Object
-            },
-            loanInformation: {},
+            loanId: 0,
+            Id: 0,
+            loanInformation: {}
         };
     },
     methods: {
@@ -25,7 +19,7 @@
 
             var uriValues = window.location.href.split('/');
             var id = uriValues[uriValues.length - 1];
-
+            self.loanId = id;
             var endPoint = 'loan/getloan/'+id;
 
             instance.get(
@@ -37,29 +31,26 @@
                 console.log(errors);
             });
         },
-        createLoan: function (e) {
-
-            e.preventDefault();
+        payFee: function () {
 
             var self = this;
 
             const config = { headers: { 'Content-Type': 'application/json' } };
 
-            var endPoint = 'loan/createloan/';
+            var endPoint = 'loan/payFee/';
 
-            var loanInformationDto = {
-                basicInfoLoan: self.basicInfoLoad,
-                loanInformation: self.loanInformation,
-                customerId: self.customerId
+            var feeInformation = {
+                loanId: self.loanId,
+                Id: self.Id
             };
 
             instance.post(
                 endPoint,
-                loanInformationDto,
+                feeInformation,
                 config
             ).then(function (response) {
 
-                window.location = '/Currentloans/';
+                window.location.reload();
 
             }).catch(function (errors) {
 
@@ -70,6 +61,10 @@
         ingrementIndex: function (index) {
             return index += 1;
         },
+        setCurrentFee: function (id) {
+            var self = this;
+            self.Id = id;
+        }
     },
     mounted: function () {
         self = this;
