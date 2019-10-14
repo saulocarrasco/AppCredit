@@ -81,7 +81,10 @@
             }
 
             return profit.toFixed(2);
-        }
+        },
+        ingrementIndex: function (index) {
+            return index += 1;
+        },
     },
     mounted: function () {
         var self = this;

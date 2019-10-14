@@ -84,6 +84,12 @@
                                 <thead class=" text-dark">
                                     <tr>
                                         <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre de cliente
+                                        </th>
+                                        <th>
                                             Cantidad pagada
                                         </th>
                                         <th>
@@ -96,6 +102,12 @@
                                 </thead>
                                 <tbody>
                                     <tr v-if="index < paymentsDate.length" v-for="(item, index) in paymentsDate" :key="index">
+                                        <td>
+                                            {{ingrementIndex(index)}}
+                                        </td>
+                                        <td>
+                                            {{item.loan.customer.name+' '+item.loan.customer.lastName}}
+                                        </td>
                                         <td>
                                             {{item.totalAmount}}
                                         </td>
