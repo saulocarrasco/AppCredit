@@ -14,30 +14,21 @@
             <div class="card-body">
                 <form>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Tipo de identificación</label>
-                                <input type="text" class="form-control" v-model="dataModel.identificationType"/>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label class="bmd-label-floating">No. Identificación</label>
-                                <input type="text" class="form-control" v-model="dataModel.identification">
+                                <select name="customers" class="browser-default custom-select" v-model="dataModel.identificationType">
+                                    <option value="CED">Cédula</option>
+                                    <option value="PASS">Pasaporte</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-8">
                             <div class="form-group">
-                                <label class="bmd-label-floating">Nombre</label>
-                                <input type="text" class="form-control" v-model="dataModel.name">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="bmd-label-floating">Apellido</label>
-                                <input type="text" class="form-control" v-model="dataModel.lastName">
+                                <label class="bmd-label-floating">No. Identificación</label>
+                                <input type="text" class="form-control" v-model="dataModel.identification">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -50,11 +41,25 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label class="bmd-label-floating">Nombre</label>
+                                <input type="text" class="form-control" v-model="dataModel.name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">Apellido</label>
+                                <input type="text" class="form-control" v-model="dataModel.lastName">
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label class="bmd-label-floating">Celular</label>
                                 <input type="text" class="form-control" v-model="dataModel.mobilePhone">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="bmd-label-floating">Teléfono</label>
                                 <input type="text" class="form-control" v-model="dataModel.phoneNumber">

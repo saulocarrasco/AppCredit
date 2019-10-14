@@ -84,7 +84,7 @@
                 config
             ).then(function (response) {
 
-                window.location = '/Currentloans/';
+                window.location = '/Loan/Currentloans/';
 
             }).catch(function (errors) {
 
