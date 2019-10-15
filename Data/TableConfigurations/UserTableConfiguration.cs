@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Data.TableConfigurations
 {
-    public class PaymentTableConfigurations : TableConfiguration<Payment>
+    public class UserTableConfiguration : TableConfiguration<User>
     {
-        public override void Configure(EntityTypeBuilder<Payment> builder)
+        public override void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("Payments");
+            builder.ToTable("Users");
             CommonColumnsConfiguration(builder);
         }
     }
