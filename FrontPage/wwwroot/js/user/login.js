@@ -12,9 +12,8 @@
         };
     },
     methods: {
-        saveUser: function (e) {
+        saveUser: function () {
 
-            e.preventDefault();
 
             var self = this;
 

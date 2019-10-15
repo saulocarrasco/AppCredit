@@ -61,22 +61,15 @@ namespace AppCredit.Api.Controllers
             return BadRequest();
         }
 
-        [HttpPost("insertuser")]
+        [HttpPost("login")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult> Login(UserCredentialsDto userModel)
+        public User Login(UserCredentialsDto userModel)
         {
-            try
-            {
-                Expression<Func<User, bool>> where = i => i.UserName == userModel.UserNameOrEmail || i.Email == userModel.UserNameOrEmail;
-                var model = _genericService.Get(where);
-            }
-            catch (Exception ex)
-            {
+          
+           Expression<Func<User, bool>> where = i => i.UserName == userModel.UserNameOrEmail || i.Email == userModel.UserNameOrEmail;
+           var model = _genericService.Get(where: where);
 
-                throw ex;
-            }
-
-            return OK(model);
+            return model;
         }
 
     }
