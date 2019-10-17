@@ -63,10 +63,11 @@ namespace AppCredit.Api.Controllers
 
         [HttpPost("login")]
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        public User Login(UserCredentialsDto userModel)
+        public User Login(UserCredentialsDto dataModel)
         {
-          
-           Expression<Func<User, bool>> where = i => i.UserName == userModel.UserNameOrEmail || i.Email == userModel.UserNameOrEmail;
+
+            Expression<Func<User, bool>> where = i => i.UserName == dataModel.UserNameOrEmail || i.Email == PasswordHelper.GetHash(dataModel.UserNameOrEmail);
+
            var model = _genericService.Get(where: where);
 
             return model;
