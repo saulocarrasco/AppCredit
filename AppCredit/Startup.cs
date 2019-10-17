@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 using AutoMapper;
 using AppCredit.Api.ProfilesConfig;
 
+
 namespace AppCredit
 {
     public class Startup
@@ -47,6 +48,14 @@ namespace AppCredit
                     builder.WithOrigins("http://localhost:49378/").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
+
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("TrueUser", policy =>
+            //    {
+            //        policy.AddRequirements(new UserRequirement());
+            //    });
+            //});
 
             services.AddTransient<IMapper, Mapper>();
 

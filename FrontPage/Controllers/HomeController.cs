@@ -5,12 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FrontPage.Models;
+using FrontPage.Middleware;
 
 namespace FrontPage.Controllers
 {
+    [LoginFilterAttribute]
     public class HomeController : Controller
     {
-
         public IActionResult Index()
         {
             return View();

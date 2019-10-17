@@ -7,7 +7,7 @@
         return {
             dataModel: {
                 userNameOrEmail: "",
-                passWord: ""
+                password: ""
             }
         };
     },
@@ -27,7 +27,10 @@
                 config
             ).then(function (response) {
 
-                window.location = "/Account/";
+                if (response.data) {
+                    self.setCookie("TrueUser", "true", 1);
+                    window.location = "/Home/Index";
+                } 
 
             }).catch(function (errors) {
 
@@ -35,6 +38,12 @@
 
             });
 
+        },
+        setCookie: function (cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
     },
     mounted: function () {
