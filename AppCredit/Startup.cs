@@ -44,7 +44,7 @@ namespace AppCredit
             {
                 options.AddPolicy(MyAllowSpecificOrigins, builder =>
                 {
-                    builder.WithOrigins("http://localhost:49378/").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    builder.WithOrigins("https://prestamoportal.azurewebsites.net", "http://localhost:49378/").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
 
