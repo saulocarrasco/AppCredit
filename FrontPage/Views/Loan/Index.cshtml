@@ -37,13 +37,7 @@
                                     <input type="text" class="form-control" v-model="basicInfoLoad.quantityAliquot">
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Modalidad de pago</label>
-                                    <input type="text" class="form-control" v-model="basicInfoLoad.modality">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Fecha de inicio</label>
                                     <input type="text" class="form-control" v-model="basicInfoLoad.startDate">
@@ -51,13 +45,24 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="bmd-label-floating">Elegir un cliente:</label>
-                                    <select name="customers" class="form-control" v-model="customerId">
+                                    <label class="bmd-label-floating">Elegir Cliente</label>
+                                    <select name="customers" class="browser-default custom-select" v-model="customerId">
+                                        <option selected>Elegir cliente...</option>
                                         <option v-for="customer in customers" v-bind:value="customer.id">{{customer.name + ' '+customer.lastName }}</option>
                                     </select>
-                                </div>                               
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Modalidad de pago</label>
+                                    <select name="customers" class="browser-default custom-select" v-model="basicInfoLoad.modality">
+                                        <option value="1">Semanal</option>
+                                        <option value="15">Quincenal</option>
+                                        <option value="30">Mensual</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <button class="btn btn-success pull-left" v-on:click="generateLoan">Calcular prestamo</button>

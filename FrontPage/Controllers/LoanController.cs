@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FrontPage.Middleware;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontPage.Controllers
 {
+    [LoginFilterAttribute]
     public class LoanController : Controller
     {
         public IActionResult Index()
