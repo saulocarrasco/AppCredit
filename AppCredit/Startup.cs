@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using AutoMapper;
 using AppCredit.Api.ProfilesConfig;
-
+using Microsoft.AspNetCore.Internal;
 
 namespace AppCredit
 {
@@ -38,16 +38,31 @@ namespace AppCredit
             services.AddTransient<GenericService, GenericService>();
             services.AddTransient<ILoanService, LoanService>();
 
-            services.AddDbContext<DbContext, AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                x => x.MigrationsAssembly("AppCredit.Api")));
 
+
+#if DEBUG
+            services.AddDbContext<DbContext, AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection"),
+                    x => x.MigrationsAssembly("AppCredit.Api")));
+
+                    services.AddCors(options =>
+                    {
+                        options.AddPolicy(MyAllowSpecificOrigins, builder =>
+                        {
+                            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                        });
+                    });
+#else
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins, builder =>
                 {
-                    builder.WithOrigins("http://localhost:49378/").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    builder.WithOrigins("http://prestamoportal.azurewebsites.net/").AllowAnyHeader().AllowAnyMethod();
                 });
             });
+
+            services.AddDbContext<DbContext, AppCreditDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                                x => x.MigrationsAssembly("AppCredit.Api")));
+#endif
 
             //services.AddAuthorization(options =>
             //{
