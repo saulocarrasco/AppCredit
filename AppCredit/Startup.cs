@@ -37,7 +37,7 @@ namespace AppCredit
 
             services.AddTransient<GenericService, GenericService>();
             services.AddTransient<ILoanService, LoanService>();
-
+            var clientUri = Configuration.GetValue<string>("ClientsUri");
 
 
 #if DEBUG
@@ -56,7 +56,7 @@ namespace AppCredit
             {
                 options.AddPolicy(MyAllowSpecificOrigins, builder =>
                 {
-                    builder.WithOrigins("http://prestamoportal.azurewebsites.net/").AllowAnyHeader().AllowAnyMethod();
+                    builder.WithOrigins(clientUri).AllowAnyHeader().AllowAnyMethod();
                 });
             });
 

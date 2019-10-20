@@ -36,7 +36,7 @@
 
         },
         goDetail: function (id) {
-            window.location = `LoanDetail/${id}`;
+            window.location = `/Loan/LoanDetail/${id}`;
         }
 
     },
