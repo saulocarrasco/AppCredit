@@ -25,6 +25,10 @@
 
             e.preventDefault();
 
+            if (!self.validInput()) {
+                return false;
+            }
+
             const config = { headers: { 'Content-Type': 'application/json' } };
 
             var endPoint = 'loan/getamortization/';
@@ -68,6 +72,11 @@
 
             var self = this;
 
+            if (self.customerId == 0) {
+                alert("Debe elegir un cliente para crear el prestamo");
+                return false;
+            }
+
             const config = { headers: { 'Content-Type': 'application/json' } };
 
             var endPoint = 'loan/createloan/';
@@ -91,6 +100,44 @@
                 console.log(errors);
 
             });
+        },
+        validInput: function () {
+            var self = this;
+
+            var message = "";
+
+            if (self.basicInfoLoad.capital == 0) {
+                message = "Ingrese el capital a prestar!";
+                alert(message);
+                return false;
+            }
+
+            if (self.basicInfoLoad.bankRate == 0) {
+                message = "Ingrese el interes a prestar!";
+                alert(message);
+                return false;
+            }
+
+            if (self.basicInfoLoad.quantityAliquot == 0) {
+                message = "Ingrese la cantidad de cuotas!";
+                alert(message);
+                return false;
+            }
+
+            if (self.basicInfoLoad.startDate == "") {
+                message = "Debe ingresar la fecha de inicio!";
+                alert(message);
+                return false;
+            }
+
+            if (self.basicInfoLoad.modality == 0) {
+                message = "Ingrese la modalidad o metodo de pago";
+                alert(message);
+                return false;
+            }
+
+            return true;
+
         }
     },
     mounted: function () {

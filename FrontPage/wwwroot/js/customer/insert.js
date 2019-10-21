@@ -58,12 +58,69 @@
             //}
 
             //return true;
+
+            var message = "";
+
+            if (self.dataModel.identificationType == "") {
+                message = "Debe elegir un tipo de identificacion!";
+                alert(message);
+                return false;
+            }
+
+            if (self.dataModel.identification == "") {
+                message = "Debe ingresar el numero de identificacion!";
+                alert(message);
+                return false;
+            }
+
+            if (self.dataModel.name == "") {
+                message = "Debe ingresar el nombre del cliente!"; 
+                alert(message);
+                return false;
+            }
+
+            if (self.dataModel.lastName == "") {
+                message = "Debe ingresar el apellido del cliente";
+                alert(message);
+                return false;
+            }
+
+            if (self.dataModel.birthDate == "") {
+                message = "Debe ingresar la fecha de nacimiento!";
+                alert(message);
+                return false;
+            }
+
+            if (self.dataModel.mobilePhone == "") {
+                message = "Debe ingresar el celular del cliente";
+                alert(message);
+                return false;
+            }
+
+            if (self.dataModel.phoneNumber == "") {
+                message = "Debe ingresar el telefono del cliente";
+                alert(message);
+                return false;
+            }
+
+            if (self.dataModel.address == "") {
+                message = "Debe ingresar una direccion para el cliente";
+                alert(message);
+                return false;
+            }
+
+            return true;
+
         },
         saveCustomer: function (e) {
 
             e.preventDefault();
 
             var self = this;
+
+            if (!self.validInput()) {
+                return false;
+            }
 
             const config = { headers: { 'Content-Type': 'application/json' } };
 
