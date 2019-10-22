@@ -9,6 +9,7 @@ using Data.Entities;
 using Domain.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace AppCredit.Api.Controllers
 {
@@ -32,6 +33,17 @@ namespace AppCredit.Api.Controllers
             var result = _genericService.GetAll<Customer>("Addresses,Identifications,Loans");
 
             return result;
+        }
+
+        [HttpGet("delete/{id}")]
+        public async Task<int> Delete(int id)
+        {
+            Expression<Func<Customer, bool>> where = i => i.Id == id;
+
+            var result = _genericService.Get(where: where);
+            _genericService.Delete(result);
+
+            return await _genericService.SavesChanges();
         }
 
         [HttpPost("insert")]
