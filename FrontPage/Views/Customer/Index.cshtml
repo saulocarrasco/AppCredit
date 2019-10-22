@@ -44,6 +44,9 @@
                                 <th>
                                     Identificación
                                 </th>
+                                <th>
+                                    Opcion
+                                </th>
                             </tr>
                         </thead>
                         <tbody v-if="customers">
@@ -69,9 +72,32 @@
                                 <td>
                                     {{item.identifications[0].value}}
                                 </td>
+                                <td v-on:click="setCurrentItem(item.id)" style="cursor: pointer;">
+                                    <a data-toggle="modal" data-target="#deleteCustomer">Borrar Cliente<i class="material-icons">delete</i></a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteCustomer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dialogo de confirmacion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Esta seguro de  que desea borrar al cliente?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" v-on:click="deleteCustomer()">Si</button>
                 </div>
             </div>
         </div>

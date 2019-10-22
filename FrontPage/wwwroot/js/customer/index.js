@@ -4,12 +4,12 @@
 
     },
     data: function () {
-        return {
-           
+        return {     
             customers: [],
             sectionText: "Registro de Fianzas",
             dateHelper: Object,
-            addressHelper: Object
+            addressHelper: Object,
+            currentCustomerId: 0
         };
     },
     methods: {
@@ -35,6 +35,32 @@
 
             });
 
+        },
+        setCurrentItem: function(id) {
+            var self = this;
+            self.currentCustomerId = id;
+        },
+        deleteCustomer: function () {
+
+            var self = this;
+
+            const config = { headers: { 'Content-Type': 'application/json' } };
+
+            var endPoint = `/customer/delete/${self.currentCustomerId}`;
+
+            instance.get(
+                endPoint,
+                config
+            ).then(function (response) {
+
+                self.loadCustomers();
+                alert("El cliente fue borrado de forma exitosa");
+
+            }).catch(function (errors) {
+
+                console.log(errors);
+
+            });
         }
 
     },
