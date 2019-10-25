@@ -40,7 +40,17 @@ namespace AppCredit.Api.Controllers
         {
             Expression<Func<Customer, bool>> where = i => i.Id == id;
 
-            var result = _genericService.Get(where: where);
+            var result = _genericService.Get("Loans", where);
+
+            if (result.Loans.Count() > 0)
+            {
+                foreach(var loan in result.Loans)
+                {
+                    loan.IsDeleted = true;
+                    _genericService.Update(loan);
+                }
+            }
+
             _genericService.Delete(result);
 
             return await _genericService.SavesChanges();
@@ -50,7 +60,7 @@ namespace AppCredit.Api.Controllers
         [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> Insert([FromBody]CustomerDto customerDto)
         {
-            
+
             var changesResult = 0;
             Customer model = null;
 
@@ -70,7 +80,7 @@ namespace AppCredit.Api.Controllers
 
                 throw ex;
             }
-            
+
 
             if (changesResult > 0)
             {

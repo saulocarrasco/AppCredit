@@ -45,8 +45,11 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(item, index) in loans" :key="index">
-                                    <td>
+                                    <td v-if="item.customer">
                                         {{item.customer.name+' '+item.customer.lastName}}
+                                    </td>
+                                    <td v-else>
+                                        No disponible
                                     </td>
                                     <td>
                                         {{item.loanAmount}}
