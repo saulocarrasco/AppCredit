@@ -20,5 +20,6 @@ namespace Data.Entities
         public decimal CapitalPayment{get;set;}
         public decimal RateAmount { get; set; }
         public FeeState FeeState { get; set; } = FeeState.Pending;
+        public decimal? SurCharge { get; set; }
     }
 }

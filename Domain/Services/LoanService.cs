@@ -60,12 +60,17 @@ namespace Domain.Services
                     DeletedDate = null
                 };
 
+                currentStartDate = currentStartDate.AddDays(modality);
 
-                feeDetail.Date = currentStartDate.AddDays(modality);
+                if (currentStartDate.DayOfWeek == DayOfWeek.Sunday)
+                {
+                   currentStartDate = currentStartDate.AddDays(1);
+                }
+
+                feeDetail.Date = currentStartDate;
 
                 loadDetails.Add(feeDetail);
 
-                currentStartDate = feeDetail.Date;
                 currentCapital -= paymentToCapital;
             }
 

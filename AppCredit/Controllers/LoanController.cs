@@ -47,7 +47,11 @@ namespace AppCredit.Api.Controllers
         [HttpGet("getloan/{id}")]
         public Loan GetLoan(int id)
         {
-            return _genericService.Get<Loan>("FeeInformations,Customer", i=>i.Id == id);
+            Loan loan = _genericService.Get<Loan>("FeeInformations,Customer", i=>i.Id == id);
+            var feeInformationsOrder = loan.FeeInformations.OrderBy(i => i.Date);
+            loan.FeeInformations = feeInformationsOrder;
+
+            return loan;
         }
 
         [HttpPost("createloan")]
@@ -78,6 +82,7 @@ namespace AppCredit.Api.Controllers
             Expression<Func<FeeInformation, bool>> where = i => i.Id == feeInformation.Id && i.LoanId == feeInformation.LoanId;
             var fee = _genericService.Get(where: where);
             fee.FeeState = FeeState.PaidOut;
+            fee.SurCharge = feeInformation.SurCharge;
 
             var payment = new Payment
             {
@@ -86,7 +91,8 @@ namespace AppCredit.Api.Controllers
                 Profit = fee.RateAmount,
                 LoanId = fee.LoanId.Value,
                 Date = DateTimeOffset.UtcNow.AddHours(-4),
-                CreationDate = DateTimeOffset.UtcNow.AddHours(-4)
+                CreationDate = DateTimeOffset.UtcNow.AddHours(-4),
+                SurCharge = feeInformation.SurCharge
             };
 
             _genericService.Update(fee);

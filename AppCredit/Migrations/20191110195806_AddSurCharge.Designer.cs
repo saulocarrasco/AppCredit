@@ -4,14 +4,16 @@ using Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AppCredit.Api.Migrations
 {
     [DbContext(typeof(AppCreditDbContext))]
-    partial class AppCreditDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191110195806_AddSurCharge")]
+    partial class AddSurCharge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,8 +103,6 @@ namespace AppCredit.Api.Migrations
                     b.Property<int>("Number");
 
                     b.Property<decimal>("RateAmount");
-
-                    b.Property<decimal?>("SurCharge");
 
                     b.Property<decimal>("TotalFee");
 
