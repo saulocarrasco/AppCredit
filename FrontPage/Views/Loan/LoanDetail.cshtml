@@ -111,6 +111,9 @@
                                         Estado de cuota
                                     </th>
                                     <th>
+                                        Cargo Mora
+                                    </th>
+                                    <th>
                                         Opcion
                                     </th>
                                 </tr>
@@ -137,6 +140,12 @@
                                     </td>
                                     <td>
                                         {{loanHelper.formatFeeState(item.feeState)}}
+                                    </td>
+                                    <td v-if="item.surCharge != null">
+                                        {{item.surCharge}}
+                                    </td>
+                                    <td v-else>
+                                        No Mora
                                     </td>
                                     <td v-if="item.feeState != 1" v-on:click="setCurrentFee(item.id)" style="cursor: pointer;">
                                         <a data-toggle="modal" data-target="#payFeeModal">Pagar cuota<i class="material-icons">payment</i></a>
@@ -166,10 +175,24 @@
                 </div>
                 <div class="modal-body">
                     Esta seguro de  que desea aplicar el pago a esta cuota?
+                    <div class="form-group">
+                        <label class="bmd-label-floating">Aplicar Mora?</label>
+                        <select class="browser-default custom-select" v-model="surcharge">
+                            <option value="0" selected>No</option>
+                            <option value="1">Si</option>
+                        </select>
+                    </div>
+                    <div class="form-group" v-if="surcharge == 1">
+                        <label class="bmd-label-floating">Monto de mora</label>
+                        <input type="text" class="form-control" v-model="surchargeValue"/>
+                    </div>
+                    <div class="row">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" v-on:click="payFee()">Aplicar pago</button>
+                    </div>
+                </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" v-on:click="payFee()">Aplicar pago</button>
                 </div>
             </div>
         </div>

@@ -9,5 +9,7 @@ namespace AppCredit.Api.Dtos
     {
         public int Id { get; set; }
         public int LoanId { get; set; }
+        public decimal? SurCharge { get; set; }
+
     }
 }

@@ -7,7 +7,9 @@
         return {
             loanId: 0,
             Id: 0,
-            loanInformation: {}
+            loanInformation: {},
+            surcharge: 0,
+            surchargeValue: 0
         };
     },
     methods: {
@@ -39,9 +41,15 @@
 
             var endPoint = 'loan/payFee/';
 
+            if (self.surcharge == 1 && self.surchargeValue == 0) {
+                alert("Ingrese el monto por mora para continuar");
+                return false;
+            }
+
             var feeInformation = {
                 loanId: self.loanId,
-                Id: self.Id
+                Id: self.Id,
+                surCharge: self.surchargeValue
             };
 
             instance.post(
